@@ -1,7 +1,7 @@
 #from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader #불러온다는건 그걸 사용하겠다는 의미
-
+from .models import Member #모델 불러오기
 #메인
 def main(request):
     template = loader.get_template('main.html')
@@ -10,18 +10,55 @@ def main(request):
 import numpy as np
 from django.shortcuts import render
 
+def syntax(request):
+    template = loader.get_template('syntax.html')
+    context = {
+        'firstname':'영일',
+        'lastname':'황',
+    }
+    return HttpResponse(template.render(context, request))
+
+def ifelse(request):
+    template = loader.get_template('ifelse.html')
+    context = {
+        'greeting':2,
+    }
+    return HttpResponse(template.render(context, request))
 
 def members(request):
-    template = loader.get_template('members.html')
+    mymembers = Member.objects.all().values()
+    template = loader.get_template('all_members.html')
     context = {
-        'greeting': 1,
+        'mymembers':mymembers,
     }
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(context, request))
 
-    arr = np.array([1, 2, 3, 4, 5])  # 배열 생성
-    total = np.sum(arr)  # 배열의 합 계산
-    mean = np.mean(arr)  # 배열의 평균 계산
-    print(f"Total: {total}, Mean: {mean}")
+def forloop(request):
+ template = loader.get_template('forloop.html')
+ context = {
+     'cars': [
+         {
+             'brand': 'Ford',
+             'model': 'Mustang',
+             'year': '1964',
+         },
+         {
+             'brand': 'Ford',
+             'model': 'Bronco',
+             'year': '1970',
+         },
+         {
+             'brand': 'Volvo',
+             'model': 'P1800',
+             'year': '1964',
+         }]
+ }
+ return HttpResponse(template.render(context, request))
 
-    # 결과를 템플릿으로 전달
-    return render(request, 'members.html', {'total': total, 'mean': mean})
+def details(request, id):
+  mymember = Member.objects.get(id=id)
+  template = loader.get_template('details.html')
+  context = {
+    'mymember': mymember,
+  }
+  return HttpResponse(template.render(context, request))

@@ -1,0 +1,17 @@
+{% extends "master.html" %}
+
+{% block title %}
+아카데미 - 모든맴버
+{% endblock %}
+
+{% block content %}
+<ul class="list-group list-group-flush">
+    {% for x in mymembers %}
+    <li class="list-group-item">
+        <a href="details/{{ x.id }}">
+        {{ x.firstname }} {{ x.lastname }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
