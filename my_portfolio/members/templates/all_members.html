@@ -8,7 +8,9 @@
 <ul class="list-group list-group-flush">
     {% for x in mymembers %}
     <li class="list-group-item">
-        <a href="details/{{ x.id }}">
+        {% load static %}
+        <img src="{% static 'img_avatar1.png' %}" class="w-25 img-thumbnail">
+        <a href="details/{{ x.id }}" class="btn">
         {{ x.firstname }} {{ x.lastname }}
         </a>
     </li>

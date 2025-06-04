@@ -5,9 +5,19 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="mt-3 mb-2">{{ mymember.lastname }}{{mymember.firstname}}</h1>
-<p>전화번호: {{ mymember.phone}}</p>
-<p>가입한날: {{ mymember.joined_date }}</p>
-<p>Back to<a href="/members">모든 멤버로</a></p>
+<h1 class="mt-4 mb-2">Profile</h1>
+<div class="card">
+    {% load static %}
+    <img src="{% static 'img_avatar1.png' %}" class="card-img-top w-25">
+    <div class="card-body">
+        <h1 class="mt-3 mb-2 card-title">{{ mymember.lastname }}{{mymember.firstname}}</h1>
+        <p class="card-text">전화번호: {{ mymember.phone}}</p>
+        <p class="card-text">가입한날: {{ mymember.joined_date }}</p>
+        <p>Back to</p>
+        <div class="d-flex justify-content-end mt-4 mb-2">
+            <a href="/members" class="btn btn-outline-primary btn-lg">모든 멤버로</a>
+        </div>
+     </div>
+</div>
 {% endblock %}
 
