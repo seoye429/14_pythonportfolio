@@ -5,6 +5,9 @@ class Member(models.Model):
     lastname = models.CharField(max_length=255)
     phone = models.IntegerField(null=True)
     joined_date = models.DateField(null=True)
+
+    def __str__(self):
+        return f"{self.lastname}{self.firstname}"
 #데이터베이스를 통틀어서 모델이라고 합니다
 #최근 개발에 트랜드는 MVC패턴 Model View Controller mvc => java spring
 #모델은 뭔가요? 데이터가 모델이라는 Object
